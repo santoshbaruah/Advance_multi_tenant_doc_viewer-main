@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Preview: {{ document.filename }}</h2>
+<div>
+    {% if document.file_type == 'pdf' %}
+        {% for page in content %}
+            <pre>{{ page }}</pre>
+        {% endfor %}
+    {% elif document.file_type == 'docx' %}
+        {% for paragraph in content %}
+            <p>{{ paragraph }}</p>
+        {% endfor %}
+    {% elif document.file_type in ['png', 'jpg', 'jpeg', 'gif'] %}
+        <img src="data:image/{{ document.file_type }};base64,{{ content }}" alt="{{ document.filename }}">
+    {% else %}
+        <pre>{{ content }}</pre>
+    {% endif %}
+</div>
+<a href="{{ url_for('main.dashboard') }}">Back to Dashboard</a>
+{% endblock %}
