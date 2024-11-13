@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Multi-Tenant Document Viewer</h1>
+    
+    <form action="{{ url_for('main.login') }}" method="GET" style="text-align: center; margin-bottom: 20px;">
+        <h2>Welcome</h2>
+        <p>Please login or register to manage your documents</p>
+        <button type="submit">Login</button>
+    </form>
+
+    <form action="{{ url_for('main.register') }}" method="GET" style="text-align: center;">
+        <p>Don't have an account?</p>
+        <button type="submit">Register</button>
+    </form>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li class="flash-message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}
